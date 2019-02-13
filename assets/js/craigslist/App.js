@@ -1,6 +1,7 @@
-import React, { Component} from 'react'
-import ReactDOM from 'react-dom'
-import Header from './includes/Header.js'
+import React, { Component} from 'react';
+import ReactDOM from 'react-dom';
+import Header from './includes/Header.js';
+import Home from './pages/Home.js';
 
 
 export default class App extends Component {
@@ -10,12 +11,11 @@ export default class App extends Component {
       name: 'Joe'
     }
   }
-  clickedBtn = () => {
-    console.log('swag')
-  }
+
   render () {
     return (<div>
       <Header />
+      <Home />
     </div>
     )
   }
