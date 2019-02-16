@@ -4,7 +4,7 @@ module.exports = [
         listing: 'cars-and-trucks',
         city: 'nyc',
         category: 'for-sale',
-        price: 46000,
+        price: 5000,
         extraDetails: {
             vin: '23432dfadjfks',
             miles: 34526,
@@ -27,7 +27,7 @@ module.exports = [
         listing: 'cars-and-trucks',
         city: 'nyc',
         category: 'for-sale',
-        price: 46000,
+        price: 1500,
         extraDetails: {
             vin: '23432dfadjfks',
             miles: 34526,
