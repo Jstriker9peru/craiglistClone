@@ -17,12 +17,27 @@ app.use('/', serveStatic(path.join(__dirname, '/public')));
 
 //api
 
+// shows all the cities available
 app.get('/api/cities', function(req, res){
     res.json(citiesData)
 });
+
+//shows all the categories for a city
+app.get('/api/:city', function(req, res){
+    res.json(categoriesData)
+});
+
+// shows all the items for that category
 app.get('/api/:city/:categories', function(req, res){
     res.json(categoriesData)
 });
+
+// show all the items for that listing
+app.get('/api/:city/:categories/:listing', function(req, res){
+    res.json(itemsData)
+});
+
+// show the item that was selected
 app.get('/api/:city/:categories/:listing/:item', function(req, res){
     res.json(itemsData)
 });

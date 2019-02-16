@@ -38,6 +38,7 @@ export default class Home extends Component {
   }
 
   loopCategories = () => {
+    const {match, history } = this.props
     // if statement for data
     if (this.state.categoriesData != '') {
       // return back the loop of categories
@@ -45,14 +46,14 @@ export default class Home extends Component {
         const loopListings = () => {
           return category.listings.map((listing, index) => {
             return (
-              <a href={`${category.title}/${listing.slug}`} className="link" key={index}>{listing.name}</a>
+              <a href={`${match.params.city}/${category.title}/${listing.slug}`} className="link" key={index}>{listing.name}</a>
             );
           })
         };
 
         return (
         <div className="categories" key={i}>
-          <div className="title">{category.title}</div>
+          <a href={`/${match.params.city}/${category.title}`} className="title">{category.title}</a>
           <div className="group-links">
             {loopListings()}
           </div>
