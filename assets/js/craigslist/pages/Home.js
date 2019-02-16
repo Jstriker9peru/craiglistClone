@@ -22,9 +22,10 @@ export default class Home extends Component {
     if (match.params.city == undefined) {
       history.push('/nyc');
     }
+    
 
     const self = this;
-    axios.get(`/api/${match.params.city}/categories`)
+    axios.get(`/api/${match.params.city}`)
     .then(function (response) {
       self.setState({
         categoriesData: response.data,

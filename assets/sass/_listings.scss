@@ -74,6 +74,12 @@
     }
 }
 
+.make-model-comp {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;

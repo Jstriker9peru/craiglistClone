@@ -77,7 +77,7 @@ var App = function (_Component) {
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Home2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/:city', component: _Home2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/:city/:category', component: _Category2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/:city/:category/:listings', component: _Listings2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/:city/:category/:listings', component: _Category2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/:city/:category/:listings/:item', component: _Details2.default })
         )
       );
@@ -137,7 +137,7 @@ var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _axios = __webpack_require__(165);
+var _axios = __webpack_require__(112);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -214,7 +214,7 @@ var Header = function (_Component) {
           citiesData: response.data,
           selectedCity: city[0].title
         }, function () {
-          console.log(self.state);
+          // console.log(self.state);
         });
       }).catch(function (error) {
         console.log(error);
@@ -301,6 +301,10 @@ var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _axios = __webpack_require__(112);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -318,38 +322,93 @@ var Category = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Category.__proto__ || Object.getPrototypeOf(Category)).call(this));
 
     _this.loopItems = function () {
-      var testArray = [1, 2, 3, 4, 5, 6, 7];
-      return testArray.map(function (item, i) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'item' },
-          _react2.default.createElement(
+      if (_this.state.itemsData != undefined) {
+        return _this.state.itemsData.map(function (item, i) {
+          return _react2.default.createElement(
             'div',
-            { className: 'image' },
+            { className: 'item' },
             _react2.default.createElement(
               'div',
-              { className: 'price' },
-              '$8900'
+              { className: 'image', style: {
+                  backgroundImage: 'url(\'' + item.images[0] + '\')'
+                } },
+              _react2.default.createElement(
+                'div',
+                { className: 'price' },
+                '$',
+                item.price
+              ),
+              'image'
             ),
-            'image'
+            _react2.default.createElement(
+              'div',
+              { className: 'details' },
+              _react2.default.createElement('i', { className: 'far fa-star' }),
+              _react2.default.createElement(
+                'h5',
+                null,
+                item.title
+              ),
+              _react2.default.createElement(
+                'h6',
+                null,
+                item.city
+              )
+            )
+          );
+        });
+      }
+    };
+
+    _this.showMakeModelDropdown = function () {
+      var _this$props = _this.props,
+          match = _this$props.match,
+          location = _this$props.location,
+          history = _this$props.history;
+
+
+      if (match.params.listings == 'cars-and-trucks') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'make-model-comp' },
+          _react2.default.createElement(
+            'div',
+            { className: 'form-group make' },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Make'
+            ),
+            _react2.default.createElement(
+              'select',
+              { name: 'make', className: 'make' },
+              _react2.default.createElement(
+                'option',
+                { value: 'bmw' },
+                'bmw'
+              )
+            )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'details' },
-            _react2.default.createElement('i', { className: 'far fa-star' }),
+            { className: 'form-group model' },
             _react2.default.createElement(
-              'h5',
+              'label',
               null,
-              '2011 BMW M3'
+              'Model'
             ),
             _react2.default.createElement(
-              'h6',
-              null,
-              'Tampa'
+              'select',
+              { name: 'model', className: 'model' },
+              _react2.default.createElement(
+                'option',
+                { value: 'bmw' },
+                'bmw'
+              )
             )
           )
         );
-      });
+      }
     };
 
     _this.state = {};
@@ -357,12 +416,30 @@ var Category = function (_Component) {
   }
 
   _createClass(Category, [{
-    key: 'render',
-    value: function render() {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
       var _props = this.props,
           match = _props.match,
-          location = _props.location,
           history = _props.history;
+
+      var self = this;
+      _axios2.default.get('/api/' + match.params.city + '/' + match.params.category).then(function (response) {
+        self.setState({
+          itemsData: response.data
+        }, function () {
+          console.log(self.state);
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props,
+          match = _props2.match,
+          location = _props2.location,
+          history = _props2.history;
 
       return _react2.default.createElement(
         'div',
@@ -404,42 +481,7 @@ var Category = function (_Component) {
                 )
               )
             ),
-            _react2.default.createElement(
-              'div',
-              { className: 'form-group make' },
-              _react2.default.createElement(
-                'label',
-                null,
-                'Make'
-              ),
-              _react2.default.createElement(
-                'select',
-                { name: 'make', className: 'make' },
-                _react2.default.createElement(
-                  'option',
-                  { value: 'bmw' },
-                  'bmw'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'form-group model' },
-              _react2.default.createElement(
-                'label',
-                null,
-                'Model'
-              ),
-              _react2.default.createElement(
-                'select',
-                { name: 'model', className: 'model' },
-                _react2.default.createElement(
-                  'option',
-                  { value: 'bmw' },
-                  'bmw'
-                )
-              )
-            ),
+            this.showMakeModelDropdown(),
             _react2.default.createElement(
               'div',
               { className: 'form-group button' },
@@ -758,7 +800,7 @@ var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _axios = __webpack_require__(165);
+var _axios = __webpack_require__(112);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -850,7 +892,7 @@ var Home = function (_Component) {
       }
 
       var self = this;
-      _axios2.default.get('/api/' + match.params.city + '/categories').then(function (response) {
+      _axios2.default.get('/api/' + match.params.city).then(function (response) {
         self.setState({
           categoriesData: response.data
         }, function () {

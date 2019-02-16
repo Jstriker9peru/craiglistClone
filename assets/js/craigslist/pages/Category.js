@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 
 export default class Category extends Component {
@@ -10,28 +11,70 @@ export default class Category extends Component {
     }
   }
 
+  componentWillMount() {
+    const {match, history} = this.props;
+    const self = this;
+    axios.get(`/api/${match.params.city}/${match.params.category}`)
+    .then(function (response) {
+      self.setState({
+        itemsData: response.data,
+      }, () => {
+        console.log(self.state);
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });  
+  }
+
   loopItems = () => {
-    let testArray = [1,2,3,4,5,6,7];
-    return testArray.map((item, i) => {
-      return (
-        <div className="item">
-          <div className="image">
-            <div className="price">
-              $8900
-            </div>  
-            image
+    if (this.state.itemsData != undefined) {
+      return this.state.itemsData.map((item, i) => {
+        return (
+          <div className="item">
+            <div className="image" style={{
+              backgroundImage: `url('${item.images[0]}')`
+            }}>
+              <div className="price">
+                ${item.price}
+              </div>  
+              image
+            </div>
+            <div className="details">
+              <i className="far fa-star"></i>
+              <h5>
+                {item.title}
+              </h5>
+              <h6>{item.city}</h6>
+            </div> 
           </div>
-          <div className="details">
-            <i className="far fa-star"></i>
-            <h5>
-              2011 BMW M3
-            </h5>
-            <h6>Tampa</h6>
-          </div> 
+        )
+            
+      });
+    }
+  }
+
+  showMakeModelDropdown = () => {
+    const { match, location, history } = this.props;
+
+    if (match.params.listings == 'cars-and-trucks') {
+      return (
+        <div className="make-model-comp">
+          <div className="form-group make">
+            <label>Make</label>
+            <select name="make" className="make">
+              <option value="bmw">bmw</option>
+            </select>
+          </div>
+          <div className="form-group model">
+            <label>Model</label>
+            <select name="model" className="model">
+              <option value="bmw">bmw</option>
+            </select>
+          </div>
         </div>
       )
-          
-    });
+    }
   }
 
   
@@ -52,18 +95,8 @@ export default class Category extends Component {
                       </select>
                     </div>
                   </div>
-                  <div className="form-group make">
-                    <label>Make</label>
-                    <select name="make" className="make">
-                      <option value="bmw">bmw</option>
-                    </select>
-                  </div>
-                  <div className="form-group model">
-                    <label>Model</label>
-                    <select name="model" className="model">
-                      <option value="bmw">bmw</option>
-                    </select>
-                  </div>
+                  {this.showMakeModelDropdown()}
+                  
                   <div className="form-group button">
                     <div className="primary-btn">Update</div>
                     <div className="reset-btn">Reset</div>
