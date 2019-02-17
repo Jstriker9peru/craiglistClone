@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 254:
+/***/ 255:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,29 +16,29 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(43);
+var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(606);
+var _reactRouterDom = __webpack_require__(161);
 
-var _Header = __webpack_require__(276);
+var _Header = __webpack_require__(277);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Home = __webpack_require__(279);
+var _Home = __webpack_require__(280);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Listings = __webpack_require__(280);
+var _Listings = __webpack_require__(281);
 
 var _Listings2 = _interopRequireDefault(_Listings);
 
-var _Category = __webpack_require__(277);
+var _Category = __webpack_require__(278);
 
 var _Category2 = _interopRequireDefault(_Category);
 
-var _Details = __webpack_require__(278);
+var _Details = __webpack_require__(279);
 
 var _Details2 = _interopRequireDefault(_Details);
 
@@ -91,7 +91,7 @@ exports.default = App;
 
 /***/ }),
 
-/***/ 275:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -101,11 +101,11 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(43);
+var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _App = __webpack_require__(254);
+var _App = __webpack_require__(255);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -117,7 +117,7 @@ _reactDom2.default.render(_react2.default.createElement(_App2.default, null), ap
 
 /***/ }),
 
-/***/ 276:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -133,13 +133,15 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(43);
+var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _axios = __webpack_require__(165);
+var _axios = __webpack_require__(112);
 
 var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRouterDom = __webpack_require__(161);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -223,6 +225,11 @@ var Header = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _props = this.props,
+          match = _props.match,
+          history = _props.history;
+
+
       return _react2.default.createElement(
         'header',
         null,
@@ -230,8 +237,8 @@ var Header = function (_Component) {
           'div',
           { className: 'left-menu' },
           _react2.default.createElement(
-            'div',
-            { className: 'logo' },
+            _reactRouterDom.Link,
+            { to: '/' + match.params.city, className: 'logo' },
             'Craigslist'
           ),
           _react2.default.createElement(
@@ -256,7 +263,7 @@ var Header = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'user-img' },
-            'Img'
+            _react2.default.createElement('i', { className: 'far fa-user' })
           ),
           _react2.default.createElement(
             'div',
@@ -281,7 +288,7 @@ exports.default = Header;
 
 /***/ }),
 
-/***/ 277:
+/***/ 278:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -297,15 +304,15 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(43);
+var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _axios = __webpack_require__(165);
+var _axios = __webpack_require__(112);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _queryString = __webpack_require__(513);
+var _queryString = __webpack_require__(514);
 
 var _queryString2 = _interopRequireDefault(_queryString);
 
@@ -758,7 +765,7 @@ exports.default = Category;
 
 /***/ }),
 
-/***/ 278:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -774,11 +781,11 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(43);
+var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Gallery = __webpack_require__(281);
+var _Gallery = __webpack_require__(282);
 
 var _Gallery2 = _interopRequireDefault(_Gallery);
 
@@ -972,13 +979,6 @@ exports.default = Details;
 
 /***/ }),
 
-/***/ 279:
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: SyntaxError: C:/Users/Jstri/Desktop/practice_websites/craiglist-clone/assets/js/craigslist/pages/Home.js: Adjacent JSX elements must be wrapped in an enclosing tag (53:14)\n\n  51 |               <Link to={`/${match.params.city}/${category.title}/${listing.slug}`} key={index}>{listing.name}</Link>\n  52 |               \n> 53 |               <a href= className=\"link\">{listing.name}</a>\n     |               ^\n  54 |             );\n  55 |           })\n  56 |         };\n");
-
-/***/ }),
-
 /***/ 280:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -995,7 +995,180 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(43);
+var _reactDom = __webpack_require__(35);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = __webpack_require__(161);
+
+var _axios = __webpack_require__(112);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Home = function (_Component) {
+  _inherits(Home, _Component);
+
+  function Home() {
+    _classCallCheck(this, Home);
+
+    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
+
+    _this.loopCategories = function () {
+      var _this$props = _this.props,
+          match = _this$props.match,
+          history = _this$props.history;
+      // if statement for data
+
+      if (_this.state.categoriesData != '') {
+        // return back the loop of categories
+        return _this.state.categoriesData.map(function (category, i) {
+          var loopListings = function loopListings() {
+            return category.listings.map(function (listing, index) {
+              return _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/' + match.params.city + '/' + category.title + '/' + listing.slug, key: index },
+                listing.name
+              );
+            });
+          };
+
+          return _react2.default.createElement(
+            'div',
+            { className: 'categories', key: i },
+            _react2.default.createElement(
+              'a',
+              { href: '/' + match.params.city + '/' + category.title, className: 'title' },
+              category.title
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'group-links' },
+              loopListings()
+            )
+          );
+        });
+      } else {
+        return 'LOADING';
+      }
+    };
+
+    _this.loopTags = function () {
+      var testTags = ['a', 's', 'f', 'g', 'h', 'j', 'l'];
+      return testTags.map(function (item, i) {
+        return _react2.default.createElement(
+          'div',
+          { key: i, className: 'tag' },
+          'Apple Macbook'
+        );
+      });
+    };
+
+    _this.state = {
+      name: 'Joe',
+      categoriesData: ''
+    };
+    return _this;
+  }
+
+  _createClass(Home, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {}
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _props = this.props,
+          match = _props.match,
+          history = _props.history;
+
+      if (match.params.city == undefined) {
+        history.push('/nyc');
+      }
+
+      var self = this;
+      _axios2.default.get('/api/' + match.params.city).then(function (response) {
+        self.setState({
+          categoriesData: response.data
+        }, function () {
+          console.log(self.state);
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'home' },
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'h1',
+            null,
+            'Connecting People ',
+            _react2.default.createElement('br', null),
+            ' Everywhere :)'
+          ),
+          _react2.default.createElement(
+            'section',
+            { className: 'links' },
+            this.loopCategories()
+          ),
+          _react2.default.createElement(
+            'section',
+            { className: 'trending' },
+            _react2.default.createElement('input', { type: 'text', name: 'search', className: 'search' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'title' },
+              _react2.default.createElement('i', { className: 'far fa-clock' }),
+              'Trending Now'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'trending-tags' },
+              this.loopTags()
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Home;
+}(_react.Component);
+
+exports.default = Home;
+
+/***/ }),
+
+/***/ 281:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(12);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -1222,7 +1395,7 @@ exports.default = Listings;
 
 /***/ }),
 
-/***/ 281:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1238,7 +1411,7 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(43);
+var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -1350,4 +1523,4 @@ exports.default = Gallery;
 
 /***/ })
 
-},[275]);
+},[276]);

@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; 
+
 
 
 
@@ -64,9 +66,11 @@ export default class Header extends Component {
   }
 
   render () {
+    const {match, history} = this.props;
+
     return (<header>
       <div className='left-menu'>
-        <div className='logo'>Craigslist</div>
+        <Link to={`/${match.params.city}`} className='logo'>Craigslist</Link>
         <div className='city-dropdown' onClick={this.clickedCityDropdown}>
           {this.state.selectedCity}
           <i className={`fas fa-chevron-down ${this.state.cityDropdown ? 'fa-chevron-up' : 'fa-chevron-down'}`} ></i>
@@ -79,7 +83,9 @@ export default class Header extends Component {
       </div>
 
       <div className='right-menu'>
-        <div className='user-img'>Img</div>
+        <div className='user-img'>
+        <i className="far fa-user"></i>
+        </div>
         <div className='user-dropdown'>
           My Account
           <i className={`fas fa-chevron-down`}></i>
